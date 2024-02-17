@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        /* Message window styling */
+        .message-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 999; /* Ensure the message appears above other elements */
+        }
+        .message {
+            margin-bottom: 20px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Your logo -->
+        <img src="CaricoaGeorgia.png" alt="Georgian Carioca Refreshments" class="logo">
+        <h2>Checkout</h2>
+        <!-- Formspree form with the provided style -->
+        <form id="fs-frm" name="simple-contact-form" accept-charset="utf-8" action="https://formspree.io/f/mgegkpew" method="post">
+            <fieldset id="fs-frm-inputs">
+                <label for="full-name">Full Name</label>
+                <input type="text" name="name" id="full-name" placeholder="First and Last" required="">
+                <label for="email-address">Email Address</label>
+                <input type="email" name="_replyto" id="email-address" placeholder="email@domain.tld" required="">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" placeholder="Your address" required="">
+                <label for="phone">Phone Number</label>
+                <input type="tel" name="phone" id="phone" placeholder="Your phone number" required="">
+                <label for="product">Product</label>
+                <select name="product" id="product" required="">
+                    <option value="Brazilade">Brazilade</option>
+                </select>
+            </fieldset>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- Message container -->
+    <div class="message-container" id="message-container">
+        <span class="close-btn" id="close-btn">&times;</span>
+        <p class="message">Request Received, wait for Mail or Call</p>
+    </div>
+
+    <script>
+        // Get the message container
+        const messageContainer = document.getElementById('message-container');
+        // Get the close button
+        const closeBtn = document.getElementById('close-btn');
+        // Get the form element
+        const form = document.getElementById('fs-frm');
+
+        // Function to show the message container
+        function showMessage() {
+            messageContainer.style.display = 'block';
+        }
+
+        // Function to hide the message container
+        function hideMessage() {
+            messageContainer.style.display = 'none';
+        }
+
+        // Add event listener to the close button
+        closeBtn.addEventListener('click', function() {
+            // Hide the message container when close button is clicked
+            hideMessage();
+        });
+
+        // Add event listener to the form submission
+        form.addEventListener('submit', function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+            // Show the message container
+            showMessage();
+            // Submit the form after a short delay (to ensure the message is displayed)
+            setTimeout(function() {
+                form.submit();
+            }, 2000); // Adjust the delay time as needed
+        });
+    </script>
+</body>
+</html>
